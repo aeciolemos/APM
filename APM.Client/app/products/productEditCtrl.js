@@ -25,6 +25,19 @@
         }
 
         vm.submit = function () {
+            vm.message = '';
+            if (vm.product.productId) {
+                vm.product.$update({ id: vm.product.productId },
+                    function (data) {
+                        vm.message = "... Save Complete";
+                    })
+            } else {
+                vm.product.$save(
+                    function (data) {
+                        vm.originalProduct = angular.copy(data);
+                        vm.message = "... Save Complete";
+                    })
+            }
         };
 
         vm.cancel = function (editForm) {

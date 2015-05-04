@@ -12,14 +12,14 @@ namespace APM.WebApi.Controllers
     {
         // GET: api/Products
         [EnableQuery()]
-        public IQueryable<Product> Get()
+        public IHttpActionResult Get()
         {
             var productRepository = new ProductRepository();
-            return productRepository.Retrieve().AsQueryable();
+            return Ok(productRepository.Retrieve().AsQueryable());
         }
 
         // GET: api/Products/5
-        public Product Get(int id)
+        public IHttpActionResult Get(int id)
         {
             Product product;
             var productRepository = new ProductRepository();
@@ -28,27 +28,55 @@ namespace APM.WebApi.Controllers
             {
                 var products = productRepository.Retrieve();
                 product = products.FirstOrDefault(p => p.ProductId == id);
+
+                if (product == null)
+                {
+                    return NotFound();
+                }
             }
             else
             {
                 product = productRepository.Create();
             }
 
-            return product;
+            return Ok(product);
         }
 
         // POST: api/Products
-        public void Post([FromBody]Product product)
+        public IHttpActionResult Post([FromBody]Product product)
         {
+            if (product == null)
+            {
+                return BadRequest("Product cannot be null");
+            }
+
             var productRepository = new ProductRepository();
-            productRepository.Save(product);
+            var newProduct = productRepository.Save(product);
+
+            if (newProduct == null)
+            {
+                return Conflict();
+            }
+
+            return Created<Product>(Request.RequestUri + newProduct.ProductId.ToString(), newProduct);
         }
 
         // PUT: api/Products/5
-        public void Put(int id, [FromBody]Product product)
+        public IHttpActionResult Put(int id, [FromBody]Product product)
         {
+            if (product == null)
+            {
+                return BadRequest("Product cannot be null");
+            }
             var productRepository = new ProductRepository();
-            productRepository.Save(id, product);
+            var updatedProduct = productRepository.Save(id, product);
+
+            if (updatedProduct == null)
+            {
+                return NotFound();
+            }
+
+            return Ok();
         }
 
         // DELETE: api/Products/5

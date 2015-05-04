@@ -6,7 +6,7 @@
 
         vm.searchCriteria = "GDN"; // could be bound to a user input on the front end
 
-        productResource.query({$orderby: "Price desc"},function (data) {
+        productResource.query(function (data) {
             vm.products = data;
         });
     }
