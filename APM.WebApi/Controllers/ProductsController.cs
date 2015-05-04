@@ -4,6 +4,8 @@ using System.Web.Http.Cors;
 using System.Web.OData;
 using APM.WebApi.Models;
 using APM.WebAPI.Models;
+using System.Web.Http.Description;
+using System;
 
 namespace APM.WebApi.Controllers
 {
@@ -12,71 +14,113 @@ namespace APM.WebApi.Controllers
     {
         // GET: api/Products
         [EnableQuery()]
+        [ResponseType(typeof(Product))]
         public IHttpActionResult Get()
         {
-            var productRepository = new ProductRepository();
-            return Ok(productRepository.Retrieve().AsQueryable());
+            try
+            {
+                var productRepository = new ProductRepository();
+                return Ok(productRepository.Retrieve().AsQueryable());
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
+        [ResponseType(typeof(Product))]
         // GET: api/Products/5
         public IHttpActionResult Get(int id)
         {
-            Product product;
-            var productRepository = new ProductRepository();
-
-            if (id > 0)
+            try
             {
-                var products = productRepository.Retrieve();
-                product = products.FirstOrDefault(p => p.ProductId == id);
+                Product product;
+                var productRepository = new ProductRepository();
 
-                if (product == null)
+                if (id > 0)
                 {
-                    return NotFound();
-                }
-            }
-            else
-            {
-                product = productRepository.Create();
-            }
+                    var products = productRepository.Retrieve();
+                    product = products.FirstOrDefault(p => p.ProductId == id);
 
-            return Ok(product);
+                    if (product == null)
+                    {
+                        return NotFound();
+                    }
+                }
+                else
+                {
+                    product = productRepository.Create();
+                }
+
+                return Ok(product);
+            }
+            catch (Exception e)
+            {
+                return InternalServerError(e);
+            }
         }
 
         // POST: api/Products
         public IHttpActionResult Post([FromBody]Product product)
         {
-            if (product == null)
+            try
             {
-                return BadRequest("Product cannot be null");
+                if (product == null)
+                {
+                    return BadRequest("Product cannot be null");
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var productRepository = new ProductRepository();
+                var newProduct = productRepository.Save(product);
+
+                if (newProduct == null)
+                {
+                    return Conflict();
+                }
+
+                return Created<Product>(Request.RequestUri + newProduct.ProductId.ToString(), newProduct);
+
             }
-
-            var productRepository = new ProductRepository();
-            var newProduct = productRepository.Save(product);
-
-            if (newProduct == null)
+            catch (Exception e)
             {
-                return Conflict();
+                return InternalServerError(e);
             }
-
-            return Created<Product>(Request.RequestUri + newProduct.ProductId.ToString(), newProduct);
         }
 
         // PUT: api/Products/5
         public IHttpActionResult Put(int id, [FromBody]Product product)
         {
-            if (product == null)
+            try
             {
-                return BadRequest("Product cannot be null");
-            }
-            var productRepository = new ProductRepository();
-            var updatedProduct = productRepository.Save(id, product);
+                if (product == null)
+                {
+                    return BadRequest("Product cannot be null");
+                }
 
-            if (updatedProduct == null)
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var productRepository = new ProductRepository();
+                var updatedProduct = productRepository.Save(id, product);
+
+                if (updatedProduct == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok();
+            }
+            catch (Exception e)
             {
-                return NotFound();
+                return InternalServerError(e);
             }
-
-            return Ok();
         }
 
         // DELETE: api/Products/5
