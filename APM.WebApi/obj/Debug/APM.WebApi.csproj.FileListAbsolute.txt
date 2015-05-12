@@ -31,12 +31,9 @@ E:\dev\projects\APM\APM.WebApi\bin\System.Web.WebPages.Deployment.dll
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.WebPages.dll
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.WebPages.Razor.dll
 E:\dev\projects\APM\APM.WebApi\bin\WebGrease.dll
-E:\dev\projects\APM\APM.WebApi\bin\Newtonsoft.Json.xml
 E:\dev\projects\APM\APM.WebApi\bin\System.Net.Http.Formatting.xml
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.Helpers.xml
-E:\dev\projects\APM\APM.WebApi\bin\System.Web.Http.xml
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.Http.WebHost.xml
-E:\dev\projects\APM\APM.WebApi\bin\System.Web.Mvc.xml
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.Optimization.xml
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.Razor.xml
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.WebPages.xml
@@ -63,7 +60,6 @@ E:\dev\projects\APM\APM.WebApi\obj\Debug\APM.WebApi.dll
 E:\dev\projects\APM\APM.WebApi\obj\Debug\APM.WebApi.pdb
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.Cors.dll
 E:\dev\projects\APM\APM.WebApi\bin\System.Web.Http.Cors.dll
-E:\dev\projects\APM\APM.WebApi\bin\System.Web.Http.Cors.xml
 E:\dev\projects\APM\APM.WebApi\bin\Microsoft.OData.Core.dll
 E:\dev\projects\APM\APM.WebApi\bin\Microsoft.OData.Edm.dll
 E:\dev\projects\APM\APM.WebApi\bin\Microsoft.Spatial.dll
