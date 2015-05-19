@@ -48,3 +48,5 @@ In order to send the solution, you should delete the following directores **befo
 - packages
 - APM.WebApi\bin
 - APM.WebApi\obj
+
+If you have added any additional projects, please ensure the bin and obj directories are removed from them also.
