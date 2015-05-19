@@ -42,7 +42,7 @@ Implement the following backlog:
 
 # Important
 
-In order to send the solution, you should delete the following directores *before* zipping up your final solution:
+In order to send the solution, you should delete the following directores **before** zipping up your final solution:
 
 - .git
 - packages
