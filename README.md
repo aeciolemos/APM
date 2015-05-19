@@ -38,3 +38,13 @@ Implement the following backlog:
 - For Story 5, assume that the conversion rate between dollar and euro is 0.9 (i.e. 1 US dollar = 90 cents). The app should display the euro symbol, and the value in euros.
 - If you need to, refactor any of the existing code to suit your own design.
 - Feel free to add comments if required.
+
+
+# Important
+
+In order to send the solution, you should delete the following directores *before* zipping up your final solution:
+
+- .git
+- packages
+- APM.WebApi\bin
+- APM.WebApi\obj
