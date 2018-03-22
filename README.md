@@ -16,7 +16,7 @@ You can login using the following credentials
 - Username:    abc@abc.com
 - Password:    Ab_123
 
-Any queries, problems or questions, please email ben.craig@sita.aero.
+Any queries, problems or questions, please email ben.duplessis@sita.aero.
 
 ## Backlog
 
