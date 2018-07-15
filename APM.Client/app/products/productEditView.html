@@ -46,6 +46,9 @@
                        type="text"
                        placeholder="Product Code (required)"
                        ng-model="vm.product.productCode"
+                       mask="AAA-9999"
+                       validate="true"
+                       limit="true"
                        required>
             </div>
             <span class="help-block has-error"

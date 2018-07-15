@@ -14,4 +14,5 @@
             ["$resource",
             "appSettings",
             productResource]);
+    angular.module('productManagement', ['ngMask']);
 }());
