@@ -12,13 +12,74 @@ namespace APM.WebAPI.Models
     /// Stores the data in a json file so that no database is required for this
     /// sample application
     /// </summary>
-    public class ProductRepository
+    public class ProductRepository : IProductRepository
     {
-        /// <summary>
-        /// Creates a new product with default values
-        /// </summary>
-        /// <returns></returns>
-        internal Product Create()
+        //internal Product Create()
+        //{
+        //    Product product = new Product
+        //    {
+        //        ReleaseDate = DateTime.Now
+        //    };
+        //    return product;
+        //}
+
+        //internal List<Product> Retrieve()
+        //{
+        //    var filePath = HostingEnvironment.MapPath(@"~/App_Data/product.json");
+
+        //    var json = File.ReadAllText(filePath);
+
+        //    var products = JsonConvert.DeserializeObject<List<Product>>(json);
+
+        //    return products;
+        //}
+
+        //internal Product Save(Product product)
+        //{
+        //    // Read in the existing products
+        //    var products = Retrieve();
+
+        //    // Assign a new Id
+        //    var maxId = products.Max(p => p.ProductId);
+        //    product.ProductId = maxId + 1;
+        //    products.Add(product);
+
+        //    WriteData(products);
+        //    return product;
+        //}
+
+        //internal Product Save(int id, Product product)
+        //{
+        //    // Read in the existing products
+        //    var products = Retrieve();
+
+        //    // Locate and replace the item
+        //    var itemIndex = products.FindIndex(p => p.ProductId == product.ProductId);
+        //    if (itemIndex > 0)
+        //    {
+        //        products[itemIndex] = product;
+        //    }
+        //    else
+        //    {
+        //        return null;
+        //    }
+
+        //    WriteData(products);
+        //    return product;
+        //}
+
+        private static void WriteData(List<Product> products)
+        {
+            // Write out the Json
+            var filePath = HostingEnvironment.MapPath(@"~/App_Data/product.json");
+
+            var json = JsonConvert.SerializeObject(products, Formatting.Indented);
+            File.WriteAllText(filePath, json);
+        }
+
+
+        // INTERFACE
+        public Product Create()
         {
             Product product = new Product
             {
@@ -27,11 +88,7 @@ namespace APM.WebAPI.Models
             return product;
         }
 
-        /// <summary>
-        /// Retrieves the list of products.
-        /// </summary>
-        /// <returns></returns>
-        internal List<Product> Retrieve()
+        public List<Product> Retrieve()
         {
             var filePath = HostingEnvironment.MapPath(@"~/App_Data/product.json");
 
@@ -42,12 +99,7 @@ namespace APM.WebAPI.Models
             return products;
         }
 
-        /// <summary>
-        /// Saves a new product.
-        /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
-        internal Product Save(Product product)
+        public Product Save(Product product)
         {
             // Read in the existing products
             var products = Retrieve();
@@ -61,13 +113,7 @@ namespace APM.WebAPI.Models
             return product;
         }
 
-        /// <summary>
-        /// Updates an existing product
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="product"></param>
-        /// <returns></returns>
-        internal Product Save(int id, Product product)
+        public Product Save(int id, Product product)
         {
             // Read in the existing products
             var products = Retrieve();
@@ -85,15 +131,6 @@ namespace APM.WebAPI.Models
 
             WriteData(products);
             return product;
-        }
-
-        private static void WriteData(List<Product> products)
-        {
-            // Write out the Json
-            var filePath = HostingEnvironment.MapPath(@"~/App_Data/product.json");
-
-            var json = JsonConvert.SerializeObject(products, Formatting.Indented);
-            File.WriteAllText(filePath, json);
         }
     }
 }

@@ -46,11 +46,18 @@
                        type="text"
                        placeholder="Product Code (required)"
                        ng-model="vm.product.productCode"
+                       ng-pattern="/([A-Z][A-Z][A-Z])\-([0-9][0-9][0-9][0-9])/"
+                       ng-minlength="8"
+                       ng-maxlength="8"
                        required>
             </div>
             <span class="help-block has-error"
-                  ng-show="productForm.inputProductCode.$invalid ">
+                  ng-show="productForm.inputProductName.$error.required">
                 Product Code is required
+            </span>
+            <span class="help-block has-error"
+                  ng-show="productForm.inputProductCode.$error.pattern ">
+                The product code must be in the format AAA-9999
             </span>
         </div>
 

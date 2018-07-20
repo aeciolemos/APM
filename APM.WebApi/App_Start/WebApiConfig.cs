@@ -1,5 +1,10 @@
 ﻿using System.Web.Http;
+using APM.WebApi.Controllers;
+using APM.WebApi.Models;
+using APM.WebAPI.Models;
 using Newtonsoft.Json.Serialization;
+using Unity;
+using Unity.Lifetime;
 
 namespace APM.WebApi
 {
@@ -11,6 +16,13 @@ namespace APM.WebApi
             // Configure Web API to use only bearer token authentication.
             //config.SuppressDefaultHostAuthentication();
             //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
+
+            // Unity configuration
+            // Added 17/Jul/2018 for Dependency Injection of Product Repository (by Aecio Lemos)
+            var container = new UnityContainer();
+            container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);
+            // End of Unity Configuration
 
             // Web API routes
             config.MapHttpAttributeRoutes();

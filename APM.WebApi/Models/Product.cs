@@ -12,6 +12,7 @@ namespace APM.WebApi.Models
         [MinLength(6, ErrorMessage = "Product Code min length is 6 characters")]
         public string ProductCode { get; set; }
 
+        [Range(1, int.MaxValue, ErrorMessage = "The value must be greater than 0")]
         public int ProductId { get; set; }
 
         [Required(ErrorMessage = "Product Name is required", AllowEmptyStrings = false)]
