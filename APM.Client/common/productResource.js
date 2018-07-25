@@ -9,6 +9,13 @@
             });
     }
 
+    function productResourceGet($resource, appSettings) {
+        return $resource(appSettings.serverPath + "/api/products", null,
+            {
+                'fetch': {method: 'GET'}
+            })
+    }
+
     angular.module("common.services")
         .factory("productResource",
             ["$resource",
