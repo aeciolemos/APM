@@ -61,6 +61,43 @@
             </span>
         </div>
 
+        <div class="form-group"
+             ng-class="{'has-error':productForm.inputProductPrice.$invalid &&
+                                    productForm.inputProductPrice.$dirty}">
+            <label class="col-md-2 control-label"
+                   for="inputProductPrice">Product Price</label>
+
+            <div class="col-md-4">
+                <input class="form-control"
+                       id="inputProductPrice"
+                       name="inputProductPrice"
+                       type="text"
+                       placeholder="Product Price (required)"
+                       ng-model="vm.product.price"
+                       required
+                       blur-to-currency amount="productPrice" />
+            </div>
+            <span class="help-block has-error">
+                <span ng-show="productForm.inputProductPrice.$error.required">
+                    Product price is required.
+                </span>
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-2 control-label"
+                   for="inputPrice">Price</label>
+
+            <div class="col-md-10">
+                <textarea class="form-control"
+                          id="inputPrice"
+                          name="inputPrice"
+                          placeholder="`Price"
+                          ng-model="vm.product.description"></textarea>
+            </div>
+            <br />
+        </div>
+
         <div class="form-group">
             <label class="col-md-2 control-label"
                    for="inputAvailabilityDate">Availability</label>
@@ -110,7 +147,7 @@
         <div class="form-group"
              ng-show="vm.message">
             <div class="col-md-6">
-                <pre style ="font: inherit">{{ vm.message }}</pre>
+                <pre style="font: inherit">{{ vm.message }}</pre>
             </div>
         </div>
 

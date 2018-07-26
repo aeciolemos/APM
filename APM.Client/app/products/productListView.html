@@ -5,11 +5,6 @@
         Product List
     </div>
 
-    <!--<div ng-app="productManagement" ng-controller="mainCtrl as ctrl">
-        <select ng-model="ctrl.selectedLocale" ng-options="locale as locale.short for locale in ctrl.locales"></select>
-        <span ng-bind-html="ctrl.total | currencyWithLocale: ctrl.selectedLocale"></span>
-    </div>-->
-
     <div class="panel-body">
         <table class="table">
 
@@ -18,7 +13,7 @@
                     <td>Product</td>
                     <td>Code</td>
                     <td>Available</td>
-                    <td>Price</td>
+                    <td>Price <button ng-click="vm.convertCurrency()" class="btn btn-default">&euro;/$</button></td>
                 </tr>
             </thead>
             <tbody>
@@ -26,7 +21,7 @@
                     <td>{{ product.productName}}</td>
                     <td>{{ product.productCode }}</td>
                     <td>{{ product.releaseDate | date }}</td>
-                    <td>{{ product.price | currency }}</td>
+                    <td>{{ product.price | currency:[vm.currencySymbol] }}</td>
                 </tr>
             </tbody>
         </table>
